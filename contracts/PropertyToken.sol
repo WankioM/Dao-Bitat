@@ -19,7 +19,7 @@ contract PropertyToken {
         emit SharesBought(msg.sender, numTokens, msg.value);
     }
 
-    function withdraw() external {
+    function withdraw() external { // use openzeppelin
         require(msg.sender == owner, "Only owner can withdraw funds");
         payable(owner).transfer(address(this).balance);
     }
