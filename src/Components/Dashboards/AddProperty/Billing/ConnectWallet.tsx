@@ -1,10 +1,10 @@
-import React,  { useEffect, useState }  from 'react';
+import React, { useEffect, useState } from 'react';
 import Web3Modal from 'web3modal';
 import { ethers } from 'ethers';
 
 const ConnectWallet: React.FC = () => {
-    const [provider, setProvider] = useState<ethers.BrowserProvider | null>(null);
-    const [account, setAccount] = useState<string | null>(null);
+  const [provider, setProvider] = useState<ethers.providers.Web3Provider | null>(null);
+  const [account, setAccount] = useState<string | null>(null);
 
   // Function to handle wallet connection
   const connectWallet = async () => {
@@ -15,12 +15,12 @@ const ConnectWallet: React.FC = () => {
       // Connect to the wallet
       const instance = await web3Modal.connect();
 
-      // Use the new 'BrowserProvider' class in ethers v6
-      const ethersProvider = new ethers.BrowserProvider(instance);
+      // Use the 'Web3Provider' class in ethers v5
+      const ethersProvider = new ethers.providers.Web3Provider(instance);
       setProvider(ethersProvider);
 
       // Get the signer (connected account)
-      const signer = await ethersProvider.getSigner();
+      const signer = ethersProvider.getSigner();
       const address = await signer.getAddress();
       setAccount(address);
 

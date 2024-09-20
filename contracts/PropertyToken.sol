@@ -1,15 +1,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
-contract PropertyToken {
-    address public owner;
+// Import Ownable contract from OpenZeppelin
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PropertyToken is Ownable {
     uint256 public tokenPrice; // Price per token in wei
     mapping(address => uint256) public sharesOwned;
 
     event SharesBought(address indexed buyer, uint256 amount, uint256 totalCost);
 
     constructor(uint256 _tokenPrice) {
-        owner = msg.sender;
         tokenPrice = _tokenPrice;
     }
 
@@ -19,8 +20,8 @@ contract PropertyToken {
         emit SharesBought(msg.sender, numTokens, msg.value);
     }
 
-    function withdraw() external { // use openzeppelin
-        require(msg.sender == owner, "Only owner can withdraw funds");
-        payable(owner).transfer(address(this).balance);
+    // Use onlyOwner modifier from OpenZeppelin
+    function withdraw() external onlyOwner {
+        payable(owner()).transfer(address(this).balance);
     }
 }

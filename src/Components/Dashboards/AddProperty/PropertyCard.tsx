@@ -23,8 +23,6 @@ interface PropertyCardProps {
   unitNo?: string;
   location?:string;
   additionalComments?: string;
-  clicks: number;
-  wishlist: number;
   cryptoaccepted: boolean;
   daoenabled: false;
 }

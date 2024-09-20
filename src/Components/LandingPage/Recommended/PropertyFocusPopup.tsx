@@ -62,6 +62,8 @@ const PropertyFocusPopup: React.FC<PropertyFocusPopupProps> = ({ property, onClo
   };
 
   const handleBuyShareClick = () => {
+    alert('Share bought successfully');
+    onClose();
 
   }
 
